@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript">
+		var ajaxRequest;
+		function updatePage() {
+		   if (ajaxRequest.readyState === 4) {
+			  var response = ajaxRequest.responseText;
+			  document.getElementById("time").innerHTML += '<br/>' +  response;
+			  makeAjaxRequest();
+		   }
+		}
+		function makeAjaxRequest() {
+		   ajaxRequest = new XMLHttpRequest();
+		   ajaxRequest.onreadystatechange = updatePage;
+		   ajaxRequest.open("GET", "http://localhost:8082/jee7/PriceVolumeBean", 
+							true);
+		   ajaxRequest.send(null);
+		}
+	</script>
+</head>
+<body onload="makeAjaxRequest();">
+  <p id="time"></p>
+</body>
+</html>

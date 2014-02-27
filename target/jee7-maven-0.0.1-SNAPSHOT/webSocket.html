@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+		<script type="text/javascript">
+				
+			</script>
+	</head>
+	
+	<body>
+		<input type="text" id="msgToSend">
+		<button id="sendButton">发送</button>
+	
+		<script type="text/javascript">
+				var webSocketLocation = 'ws://localhost:8082/jee7/myWebSocket',
+				webSocket = new WebSocket(webSocketLocation);
+		
+				webSocket.onerror = function(evt) {
+					console.log("error")	
+				};
+				
+				webSocket.onmessage = function(evt) {
+					console.log(evt.data);
+				};
+			
+				var sendButton = document.getElementById('sendButton'),
+				textInput = document.getElementById('msgToSend');
+	
+				sendButton.addEventListener('click', function() {
+					webSocket.send(textInput.value);
+					}, false);
+		</script>
+	</body>
+</html>
